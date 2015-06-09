@@ -1,4 +1,4 @@
-package ch01.ex01_01;
+package ch01.ex01_02;
 
 public class FileExplorer {
 
