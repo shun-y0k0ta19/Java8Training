@@ -8,6 +8,8 @@ public class TestFileExplorer {
 
 	@Test
 	public void test() {
+		FileExplorer fe = new FileExplorer();
+		fe.hashCode();
 		fail("Not yet implemented");
 	}
 
