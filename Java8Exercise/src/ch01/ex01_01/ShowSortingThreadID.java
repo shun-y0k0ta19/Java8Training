@@ -8,7 +8,7 @@ package ch01.ex01_01;
 import java.util.Arrays;
 import java.util.Random;
 
-public class ShowSortingThread {
+public class ShowSortingThreadID {
 	private final int length = 10;
 	private Random rand = new Random();
 	
@@ -27,7 +27,7 @@ public class ShowSortingThread {
 	
 	public static void main(String[] args) {
 		System.out.println("MainThread ID is " + Thread.currentThread().getId());
-		ShowSortingThread sst = new ShowSortingThread();
+		ShowSortingThreadID sst = new ShowSortingThreadID();
 		new Thread(sst::showSortingThread).start();
 	}
 
