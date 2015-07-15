@@ -18,7 +18,7 @@ public class ShowSortingThreadID {
 			strings[i] = Integer.toString(rand.nextInt(length));
 		}
 		
-		System.out.println("ID of a Thread calling <Arrays.sort> is " + Thread.currentThread().getId());
+		System.out.println("ID of the Thread calling <Arrays.sort> is " + Thread.currentThread().getId());
 		Arrays.sort(strings, (str1, str2) -> {
 			System.out.println("This ThreadID is " + Thread.currentThread().getId());
 			return str1.compareTo(str2);

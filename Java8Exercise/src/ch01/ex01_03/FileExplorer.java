@@ -1,4 +1,4 @@
-package ch01.ex01_02;
+package ch01.ex01_03;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,11 +10,10 @@ import java.util.Objects;
 public class FileExplorer {
 	private final File[] EMPTY_FILES = new File[0];
 	private final String[] EMPTY_FILENAMES = new String[0];
-
 	/**
 	 * directoryで指定されたディレクトリ内のサブディレクトリ情報を抽出します。
 	 * @param directory サブディレクトリを表示させたいディレクトリ情報を示すFileクラスのインスタンス
-	 * @return directoryで指定されたディレクトリ内のサブディレクトリ情報を含むFileクラスの配列を返します。<br>
+	 * @return directoryで指定されたディレクトリ内のサブディレクトリ情報を含むFileクラスの配列を返します。
 	 * ディレクトリでないパスを指定した場合、指定したディレクトリが存在しない場合、サブディレクトリが存在しない場合は、空配列を返します。
 	 * @throws NullPointerException directory引数がnullである場合
 	 */
@@ -43,9 +42,10 @@ public class FileExplorer {
 	 * @throws NullPointerException directory引数がnullである場合
 	 */
 	public String[] getFileNames(File directory, String extension){
-		Objects.requireNonNull(directory);
-		
 		String effectivelyFinalExtension;
+		if(Objects.isNull(directory)){
+			throw new NullPointerException();
+		}
 		if(Objects.isNull(extension)){
 			effectivelyFinalExtension = "";
 		}
@@ -58,7 +58,9 @@ public class FileExplorer {
 		if(directory.isFile()){
 			return EMPTY_FILENAMES;
 		}
-		String[] fileNames = directory.list((dir, name) -> name.endsWith(effectivelyFinalExtension));
+		String[] fileNames = directory.list((dir, name) -> {
+			return name.endsWith(effectivelyFinalExtension);
+		});
 		
 		return fileNames;
 	}
@@ -90,21 +92,19 @@ public class FileExplorer {
 		}
 		return subDirectories;
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.printf("input directory path.%n> ");
 		String path = reader.readLine();
+		System.out.printf("input extension.%n> ");
+		String extension = reader.readLine();
 		FileExplorer fileExplorer = new FileExplorer();
-		System.out.println("SubDirectories:");
-		fileExplorer.getSubDirectories(new File(path));
-		System.out.println("SubDirectories:");
-		fileExplorer.getSubDirectoriesUsingFunctionalInterface(new File(path));
-		//fileExplorer.showSubDiretories("/Users/design/Documents/WebServer/index.js");
-		//fileExplorer.showSubDiretories("/daf");
-		//fileExplorer.showSubDiretories("/Users/design/Documents/test");
-		//fileExplorer.showSubDiretories(new File("/Users/design/Documents/WebServer/index.js"));
-		//fileExplorer.showSubDiretories(null);
+		String[] fileNames = fileExplorer.getFileNames(new File(path), extension);
+		for(String name : fileNames){
+			System.out.println(name);
+		}
 	}
+
 
 }

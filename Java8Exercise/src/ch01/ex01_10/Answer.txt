@@ -1,0 +1,4 @@
+引数に自分自身のCollectionFrameworkをとるものはデフォルトメソッドとする。
+(特定のCollectionFrameworkインターフェース自身への操作などを行うメソッド)
+引数に自分自身のCollectionFrameworkをとらず、返り値にCollectionFrameworkを返すメソッドは静的メソッドとする。
+(あるCollectionFrameworkを生成するようなメソッド)
