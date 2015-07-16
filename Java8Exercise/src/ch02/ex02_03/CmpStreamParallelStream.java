@@ -10,13 +10,15 @@ import java.util.List;
 public class CmpStreamParallelStream {
 
 	public void cmp(String path) throws IOException{
-		String contents = new String(Files.readAllBytes(Paths.get(path)), 
-				StandardCharsets.UTF_8);
+		String contents = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
 		List<String> words = Arrays.asList(contents.split("\\P{L}+"));
+		
+		//シングルスレッドのタイム計測
 		long start = System.nanoTime();
 		words.stream().filter(w ->  w.length() > 12).count();
 		long end = System.nanoTime();
 		System.out.println("        Stream: " + (end - start));
+		//マルチスレッドのタイム計測
 		start = System.nanoTime();
 		words.parallelStream().filter(w ->  w.length() > 12).count();
 		end = System.nanoTime();
