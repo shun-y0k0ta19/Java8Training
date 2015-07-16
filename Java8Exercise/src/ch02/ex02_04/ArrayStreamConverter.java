@@ -12,7 +12,7 @@ public class ArrayStreamConverter {
 		//Stream<int[]>のストリームが作られる
 		
 		IntStream.of(values);
-		//上でintのStreamが作られる
+		//上でStream<int>のStreamが作られる
 	}
 	
 	public static void main(String[] args){
