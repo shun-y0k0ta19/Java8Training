@@ -5,18 +5,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class ArrayListCollector {
+	
 	public <T> ArrayList<T> arrayListParallelCollect(ArrayList<T> arrayList, Stream<T> stream){
 		final AtomicInteger index = new AtomicInteger(0);
-		stream.parallel().reduce(arrayList, (list, t) -> {
-			list.set(index.getAndIncrement(), t);
-			return list;
-		}, (list1, list2) -> {
-			return list1;
+		stream.parallel().forEach((element) -> {
+			arrayList.set(index.getAndIncrement(), element);
 		});
 		return arrayList;
 		
 	}
-	
+
 	public static void main(String[] args){
 		ArrayListCollector alc = new ArrayListCollector();
 		final int listNum = 20;
