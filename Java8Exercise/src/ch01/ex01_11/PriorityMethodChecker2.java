@@ -72,6 +72,7 @@ public class PriorityMethodChecker2 {
 	/*
 	public class IabstractExtendsParentStatic extends ParentStatic implements Iabstract{
 		//コンフリクトでコンパイルエラー
+		
 	}
 */
 	/*

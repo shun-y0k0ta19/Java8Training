@@ -8,7 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CmpStreamParallelStream {
-
+/*
+ * resut:
+ *         Stream: 95323836
+ * ParallelStream: 17766112
+ */
 	public void cmp(String path) throws IOException{
 		String contents = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
 		List<String> words = Arrays.asList(contents.split("\\P{L}+"));
