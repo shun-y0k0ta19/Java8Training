@@ -1,0 +1,2 @@
+indentifyの型がUとなっているため、accumulatorの第一引数は常にUとなるため、
+? super Uとする必要はない

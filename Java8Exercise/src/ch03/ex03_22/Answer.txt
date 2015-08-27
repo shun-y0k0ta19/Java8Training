@@ -1,0 +1,17 @@
+
+    thenCompose
+
+    public <U> CompletableFuture<U> thenCompose(Function<? super T,? extends CompletionStage<U>> fn)
+
+    インタフェースからコピーされた説明: CompletionStage
+    このステージが正常に完了したときに、このステージを指定された関数への引数に設定して実行される新しいCompletionStageを返します。例外の完了に適用されるルールの詳細は、CompletionStageのドキュメントを参照してください。
+
+    定義:
+        thenCompose、インタフェース: CompletionStage<T>
+    型パラメータ:
+        U - 返されるCompletionStageの結果の型
+    パラメータ:
+        fn - 新しいCompletionStageを返す関数
+    戻り値:
+        CompletionStage
+
