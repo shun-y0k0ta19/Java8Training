@@ -4,9 +4,9 @@ import java.util.stream.Stream;
 
 public class AverageCalculator {
 	
-	public class Memory{
-		public Double total = 0.0;
-		public int count = 0;
+	class Memory{
+		private Double total = 0.0;
+		private int count = 0;
 		
 		public Double calcAve(){
 			return total / count;

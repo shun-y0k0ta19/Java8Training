@@ -1,0 +1,2 @@
+composeの戻り値がFunction<T,T>であるのに対し、tranformの引数の型はUnaryOperation<T>であるため
+Javaはノミナル型であるため、関係性のない型には渡せない

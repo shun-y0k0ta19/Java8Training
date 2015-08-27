@@ -1,0 +1,27 @@
+java.io.FileFilter
+boolean accept(File pathname)
+
+java.io.FilenameFilter
+boolean accept(File dir, String name)
+
+java.nio.file.DirectoryStream.Filter<T>
+boolean accept(T entry) throws IOException
+
+java.util.logging.Filter
+boolean isLoggable(LogRecord record)
+
+javax.imageio.spi.ServiceRegistry.Filter
+boolean filter(Object provider)
+
+javax.management.NotificationFilter
+boolean isNotificationEnabled(Notification notification)
+
+javax.xml.stream.EventFilter
+boolean accept(XMLEvent event)
+
+javax.xml.stream.StreamFilter
+boolean accept(XMLStreamReader reader)
+
+付加価値
+DirectoryStream.Filter<T>は例外をスローできる
+FileNameFilterは引数を２つとれる

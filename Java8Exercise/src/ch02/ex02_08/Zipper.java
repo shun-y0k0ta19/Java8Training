@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Spliterator;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 public class Zipper {
 
@@ -36,11 +35,6 @@ public class Zipper {
 		}
 		return stb.build();
 		
-		/*
-		Spliterator<T> sptr = stb.build().spliterator();
-		System.out.println(sptr.characteristics());
-		return StreamSupport.stream(sptr, false);
-		*/
 	}
 	
 	public static void main(String[] args) {
