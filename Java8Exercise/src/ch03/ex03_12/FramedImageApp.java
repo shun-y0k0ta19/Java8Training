@@ -1,4 +1,4 @@
-package ch03.ex03_11;
+package ch03.ex03_12;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class FramedImageApp extends Application {
 
-	public Image transform(Image in, ColorTransformer ct){
+	private Image transform(Image in, ColorTransformer ct){
 		int width = (int) in.getWidth();
 		int height = (int) in.getHeight();
 		WritableImage out = new WritableImage(width, height);
@@ -26,16 +26,13 @@ public class FramedImageApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		Image image = new Image("ch03/ex03_12/queen-mary.png");
-		Image transformedImage = 
-				transform(transform(image, ColorTransformerGenerator.generate(Color::brighter)),
-						(x, y, color) -> {
-							if(x < 10 || y < 10 || (x >= image.getWidth() - 10) || (y >= image.getHeight() -10)){
-								return Color.GRAY;
-							}
-							else {
-								return color;
-							}
-						});
+		Image transformedImage = transform(image, 
+				ColorTransformerGenerator.compose(
+						ColorTransformerGenerator.frame(
+								(int) image.getWidth(), 
+								(int) image.getHeight(), 
+								15,
+								Color.GRAY), Color::brighter));
 		primaryStage.setScene(new Scene(new HBox(
 				new ImageView(image),
 				new ImageView(transformedImage)
