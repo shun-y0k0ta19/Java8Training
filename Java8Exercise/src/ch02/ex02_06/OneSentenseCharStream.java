@@ -9,7 +9,6 @@ public class OneSentenseCharStream {
 	    return IntStream.range(0, s.length()).mapToObj(n -> s.charAt(n));
 	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		characterStream("test").forEach(System.out::println);
 	}
 
