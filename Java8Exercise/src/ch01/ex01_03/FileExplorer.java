@@ -27,6 +27,9 @@ public class FileExplorer {
 		}
 
 		File[] subDirectories = directory.listFiles(dir -> dir.isDirectory());
+		if(subDirectories == null){
+			return EMPTY_FILES;
+		}
 		for(File subDir : subDirectories){
 			System.out.println(subDir.getName());
 		}
@@ -87,6 +90,9 @@ public class FileExplorer {
 
 		FileFilter directoryFilter = file -> file.isDirectory();
 		File[] subDirectories = directory.listFiles(directoryFilter);
+		if(subDirectories == null){
+			return EMPTY_FILES;
+		}
 		for(File file : subDirectories){
 			System.out.println(file.getName());
 		}
@@ -97,8 +103,14 @@ public class FileExplorer {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.printf("input directory path.%n> ");
 		String path = reader.readLine();
+		if(path == null){
+			path ="";
+		}
 		System.out.printf("input extension.%n> ");
 		String extension = reader.readLine();
+		if(extension == null){
+			extension = "";
+		}
 		FileExplorer fileExplorer = new FileExplorer();
 		String[] fileNames = fileExplorer.getFileNames(new File(path), extension);
 		for(String name : fileNames){

@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
-import ch02.ex02_01.ParallelLongWordCount;
 
 public class Limit5Logger {
 	

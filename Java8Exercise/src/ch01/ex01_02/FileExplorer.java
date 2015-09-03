@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class FileExplorer {
 	private final File[] EMPTY_FILES = new File[0];
@@ -28,6 +30,9 @@ public class FileExplorer {
 		}
 
 		File[] subDirectories = directory.listFiles(dir -> dir.isDirectory());
+		if(subDirectories == null){
+			return EMPTY_FILES;
+		}
 		for(File subDir : subDirectories){
 			System.out.println(subDir.getName());
 		}
@@ -75,16 +80,19 @@ public class FileExplorer {
 			throw new NullPointerException();
 		}
 		if(directory.isFile()){
-			System.out.println("Target \"" + directory.getAbsolutePath() + "\" is not a directory.");
+			//System.out.println("Target \"" + directory.getAbsolutePath() + "\" is not a directory.");
 			return EMPTY_FILES;
 		}
 		if(!directory.exists()){
-			System.out.println("No such file or Directory.");
+			//System.out.println("No such file or Directory.");
 			return EMPTY_FILES;
 		}
 
 		FileFilter directoryFilter = file -> file.isDirectory();
 		File[] subDirectories = directory.listFiles(directoryFilter);
+		if(subDirectories == null){
+			return EMPTY_FILES;
+		}
 		for(File file : subDirectories){
 			System.out.println(file.getName());
 		}
@@ -95,9 +103,12 @@ public class FileExplorer {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.printf("input directory path.%n> ");
 		String path = reader.readLine();
+		if(path == null){
+			path = "";
+		}
 		FileExplorer fileExplorer = new FileExplorer();
 		System.out.println("SubDirectories:");
-		fileExplorer.getSubDirectories(new File(path));
+		Stream.of(fileExplorer.getSubDirectories(new File(path))).forEach(System.out::println);
 		System.out.println("SubDirectories:");
 		fileExplorer.getSubDirectoriesUsingFunctionalInterface(new File(path));
 		//fileExplorer.showSubDiretories("/Users/design/Documents/WebServer/index.js");

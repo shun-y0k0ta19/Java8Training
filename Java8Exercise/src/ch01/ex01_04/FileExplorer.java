@@ -2,11 +2,9 @@ package ch01.ex01_04;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Objects;
 
 public class FileExplorer {
@@ -100,6 +98,9 @@ public class FileExplorer {
 		FileExplorer fileExplorer = new FileExplorer();
 		path = "/Users/design/Documents/WebServer";
 		File[] files = new File(path).listFiles();
+		if(files == null){
+			files = new File[0];
+		}
 		fileExplorer.sortFiles(files);
 		for(File file : files){
 			System.out.println(file.getAbsolutePath());

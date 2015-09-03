@@ -1,7 +1,6 @@
 package ch02.ex02_05;
 
 import java.util.stream.LongStream;
-import java.util.stream.Stream;
 
 public class RandomGenerator {
 

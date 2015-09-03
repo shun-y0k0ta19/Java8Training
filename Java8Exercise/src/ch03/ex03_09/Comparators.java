@@ -2,6 +2,7 @@ package ch03.ex03_09;
 
 import java.lang.reflect.Field;
 import java.util.Comparator;
+import java.util.Objects;
 
 
 public class Comparators {
@@ -11,9 +12,8 @@ public class Comparators {
 			for(String fieldName : fieldNames){
 				Object field1 = getField(obj1, fieldName);
 				Object field2 = getField(obj2, fieldName);
-				if(field1 == null){
-					throw new IllegalArgumentException(fieldName + " does not exist.");
-				}
+				Objects.requireNonNull(field1, obj1 + " does not have " + fieldName);
+				Objects.requireNonNull(field2, obj2 + " does not have " + fieldName);
 				if(field1.equals(field2)){
 				}
 				else {
@@ -56,10 +56,13 @@ public class Comparators {
 		System.out.println(compare(john, john, lexicographicComparator("name", "age")));
 		
 		Group group = new Group(john, mark);
+		Group group2 = new Group(john, john);
 		System.out.println(compare(group, group, lexicographicComparator("leader", "member")));
+		System.out.println(compare(group, group2, lexicographicComparator("leader", "member")));
 	}
 	
 	private static <T> int compare(T one, T two, Comparator<T> comparator){
 		return comparator.compare(one, two);
+		
 	}
 }
