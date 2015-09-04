@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class TestshowSubDirectories {
-	private FileExplorer fileExplorer = new FileExplorer();
+	//private FileExplorer fileExplorer = new FileExplorer();
 	
 	@Rule
 	private ExpectedException exception = ExpectedException.none();
