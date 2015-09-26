@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import ch04.ex04_08.FXMLPair?>
+<?import ch04.ex04_08.FXMLPerson?>
+
+<FXMLPair xmlns:fx="http://javafx.com/fxml" fx:controller="ch04.ex04_08.ControlPairUsingFXML">
+	<p1>
+		<FXMLPerson fx:id="p1" age=23 name="John"/>
+    </p1>
+    <p2>
+    	<FXMLPerson fx:id="p2" age=23 name="Mike"/>
+    </p2>
+</FXMLPair>
