@@ -1,4 +1,4 @@
-package ch04.ex04_01;
+package ch04.ex04_03;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class TextFieldAndLabelApp extends Application {
+public class GreetingApp extends Application {
 
 	@Override
 	public void start(Stage stage) {

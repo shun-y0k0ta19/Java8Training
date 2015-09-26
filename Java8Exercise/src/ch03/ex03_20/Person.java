@@ -1,8 +1,8 @@
 package ch03.ex03_20;
 
 public class Person {
-	public String name;
-	public int age;
+	private String name;
+	private int age;
 	
 	public Person(String name, int age){
 		this.name = name;
@@ -11,5 +11,13 @@ public class Person {
 	
 	public String toString(){
 		return "Person name:" + name + " age:" + age + "\n";
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public int getAge(){
+		return age;
 	}
 }
