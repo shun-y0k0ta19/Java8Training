@@ -1,6 +1,5 @@
 package ch05.ex05_06;
 
-import java.sql.Date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
