@@ -49,7 +49,7 @@ public class LongestCharsFinder {
 	public static void main(String[] args){
 		LongestCharsFinder lcf = new LongestCharsFinder();
 		try {
-			String longestWord = lcf.findMaxCharsWord("src/ch06/ex01/war-and-peace.txt");
+			String longestWord = lcf.findMaxCharsWord("src/files/war-and-peace.txt");
 			System.out.println(longestWord);
 		} catch (IOException | InterruptedException | TimeoutException e) {
 			e.printStackTrace();

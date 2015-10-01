@@ -31,7 +31,7 @@ public class ElementsAccumulator<E> {
 
 		ElementsAccumulator<String> eAccumulator = new ElementsAccumulator<>();
 		try {
-			List<String> wordList = createWordList("src/ch06/ex04/war-and-peace.txt");
+			List<String> wordList = createWordList("src/files/war-and-peace.txt");
 			
 			long maxWordChars = eAccumulator.extractMax(wordList, s -> Long.valueOf(s.length()));
 			System.out.println(maxWordChars);
