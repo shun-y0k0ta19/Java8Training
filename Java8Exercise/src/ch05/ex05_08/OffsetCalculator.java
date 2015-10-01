@@ -1,8 +1,6 @@
 package ch05.ex05_08;
 
-import java.time.Clock;
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
@@ -18,14 +16,12 @@ public class OffsetCalculator {
 	}
 	
 	public static void main(String[] args) {
-		LocalDateTime now = LocalDateTime.now();
-		ZonedDateTime utcNow = ZonedDateTime.of(now, Clock.systemUTC().getZone());
 		
 		ZoneId.getAvailableZoneIds().stream()
-		.map(ZoneId::of)
-		.map(zoneId -> ZonedDateTime.of(now, zoneId))
-		.map(zonedTime -> Duration.between(zonedTime, utcNow))
-		.forEach(duration -> System.out.println(durationFormat(duration)));
+		.map(zoneId -> ZonedDateTime.now(ZoneId.of(zoneId)).getOffset())
+		//.map(zonedTime -> Duration.between(zonedTime, utcNow))
+		.forEach(zoneOffset -> System.out.println(zoneOffset.toString()));
+		//.forEach(duration -> System.out.println(durationFormat(duration)));
 	}
 
 }

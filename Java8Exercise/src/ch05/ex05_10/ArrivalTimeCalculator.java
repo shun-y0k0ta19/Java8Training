@@ -19,7 +19,7 @@ public class ArrivalTimeCalculator {
 	public static void main(String[] args) {
 		//ZoneId.getAvailableZoneIds().stream().filter(s -> s.contains("Europe")).forEach(System.out::println);
 		String depatureZoneName = "America/Los_Angeles";
-		LocalDateTime depatureTime = LocalDateTime.of(2015, 9, 27, 3, 5);
+		LocalDateTime depatureTime = LocalDateTime.of(2015, 9, 27, 15, 5);
 		String arrivalZoneName = "CET";
 		Duration flightTime = Duration.ofHours(10).plusMinutes(50);
 		ZonedDateTime arrivalTime = calcArrivalTime(depatureZoneName, depatureTime, arrivalZoneName, flightTime);

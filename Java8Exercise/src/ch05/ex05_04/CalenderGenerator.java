@@ -21,5 +21,6 @@ public class CalenderGenerator {
 				System.out.printf("%3d", day.getDayOfMonth());
 			}
 		}
+		System.out.println();
 	}
 }
