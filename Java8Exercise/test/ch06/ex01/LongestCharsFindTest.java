@@ -9,8 +9,11 @@ import org.junit.Test;
 
 public class LongestCharsFindTest {
 	
+	/**
+	 * 読み込んだファイルの中から最大文字数の単語を抽出できるか
+	 */
 	@Test
-	public void test() {
+	public void testFindMaxChars() {
 		LongestCharsFinder lcf = new LongestCharsFinder();
 		try {
 			String longestWord = lcf.findMaxCharsWord("test/ch06/ex01/war-and-peace.txt");
@@ -19,5 +22,4 @@ public class LongestCharsFindTest {
 			e.printStackTrace();
 		}
 	}
-
 }
