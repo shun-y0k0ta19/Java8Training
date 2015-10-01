@@ -1,7 +1,5 @@
 package ch04.ex04_08;
 
-
-
 import ch03.ex03_20.Person;
 
 public class FXMLPair {
