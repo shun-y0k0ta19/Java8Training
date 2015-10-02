@@ -1,5 +1,7 @@
 package ch06.ex01;
 
+import static MyUtilities.FileUtils.*;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -7,8 +9,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicReference;
-
-import static Utilities.FileUtils.*;
 
 public class LongestCharsFinder {
 

@@ -1,13 +1,11 @@
 package ch06.ex04;
 
+import static MyUtilities.FileUtils.*;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.LongAccumulator;
 import java.util.function.Function;
-
-import static Utilities.FileUtils.*;
 
 public class ElementsAccumulator<E> {
 
@@ -30,18 +28,13 @@ public class ElementsAccumulator<E> {
 	public static void main(String[] args){
 
 		ElementsAccumulator<String> eAccumulator = new ElementsAccumulator<>();
-		try {
-			List<String> wordList = createWordList("src/files/war-and-peace.txt");
-			
-			long maxWordChars = eAccumulator.extractMax(wordList, s -> Long.valueOf(s.length()));
-			System.out.println(maxWordChars);
+		List<String> wordList = createWordList("src/files/war-and-peace.txt");
+		
+		long maxWordChars = eAccumulator.extractMax(wordList, s -> Long.valueOf(s.length()));
+		System.out.println(maxWordChars);
 
-			long minWordChars = eAccumulator.extractMin(wordList, s -> Long.valueOf(s.length()));
-			System.out.println(minWordChars);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		long minWordChars = eAccumulator.extractMin(wordList, s -> Long.valueOf(s.length()));
+		System.out.println(minWordChars);
 
 	}
 
