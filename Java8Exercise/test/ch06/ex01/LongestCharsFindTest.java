@@ -16,7 +16,7 @@ public class LongestCharsFindTest {
 	public void testFindMaxChars() {
 		LongestCharsFinder lcf = new LongestCharsFinder();
 		try {
-			String longestWord = lcf.findMaxCharsWord("test/FilesForTests/war-and-peace.txt");
+			String longestWord = lcf.findMaxCharsWord("test/FilesForTests/MyUtilities/war-and-peace.txt");
 			assertEquals("characteristically", longestWord);
 		} catch (IOException | InterruptedException | TimeoutException e) {
 			e.printStackTrace();

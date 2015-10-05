@@ -1,4 +1,4 @@
-package Utilities;
+package MyUtilities;
 
 import static org.junit.Assert.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class FileUtilsTest {
-	private final String textPathString = "test/FilesForTests/war-and-peace.txt";
+	private final String textPathString = "test/FilesForTests/MyUtilities/war-and-peace.txt";
 	private final Path textPath = Paths.get(textPathString);
 	
 	@Test
