@@ -32,7 +32,7 @@ public class CmpStreamParallelStream {
 	public static void main(String[] args) {
 		CmpStreamParallelStream csps = new CmpStreamParallelStream();
 		try {
-			csps.cmp("src/ch02/ex02_03/Alice.txt");
+			csps.cmp("src/ch02/ex02_03/LongAlice.txt");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
