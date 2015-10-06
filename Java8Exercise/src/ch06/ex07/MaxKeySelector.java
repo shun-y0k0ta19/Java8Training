@@ -6,7 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MaxKeySelector {
 
 	public static String selectMaxKey(ConcurrentHashMap<String, Long> map) {
-		Entry<String, Long> maxEntry = map.reduceEntries(1000, (max, observed) -> max.getValue() > observed.getValue() ? max : observed);
+		Entry<String, Long> maxEntry = map.reduceEntries(1000, 
+				(max, observed) -> max.getValue() > observed.getValue() ? max : observed);
 		return maxEntry.getKey();
 	}
 	
