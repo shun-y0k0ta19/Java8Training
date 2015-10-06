@@ -6,19 +6,23 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 
 public class WordCollector {
 
-	public ConcurrentHashMap<String, Set<File>> collectWordsFromFiles(Set<File> files){
+	public ConcurrentHashMap<String, Set<File>> collectWords(Set<File> files){
 		ConcurrentHashMap<String, Set<File>> filesContainingWord = new ConcurrentHashMap<>();
 		files.stream().parallel().forEach(file -> {
-			//merge用のfileのセットを作る
-			Set<File> fileSet = new HashSet<>();
-			fileSet.add(file);
-			
 			Set<String> wordSet = createWordSet(file.toPath());
-			//wordSet.stream().parallel().forEach(word ->{
 			wordSet.stream().forEach(word -> {
+				//merge用のfileのセットを作る
+				Set<File> fileSet = new HashSet<>();
+				fileSet.add(file);
+				
 				filesContainingWord.merge(word, fileSet, (existSet, newSet) -> {
 					existSet.addAll(newSet);
 					return existSet;
@@ -27,17 +31,54 @@ public class WordCollector {
 		});
 		return filesContainingWord;
 	}
-	
+
+	public ConcurrentHashMap<String, Set<File>> collectWordsWithExecutorService(Set<File> files) throws InterruptedException, TimeoutException {
+		ConcurrentHashMap<String, Set<File>> filesContainingWord = new ConcurrentHashMap<>();
+		ExecutorService es = Executors.newCachedThreadPool();
+		files.stream().forEach(file -> {
+			es.submit(() -> {
+				createWordSet(file.toPath()).stream().forEach(word -> {
+					//merge用のfileのセットを作る
+					Set<File> fileSet = new HashSet<>();
+					fileSet.add(file);
+					
+					filesContainingWord.merge(word, fileSet, (existSet, newSet) -> {
+						existSet.addAll(newSet);
+						return existSet;
+					});
+				});
+			});
+		});
+		es.shutdown();
+		if(es.awaitTermination(10, TimeUnit.SECONDS)){
+			return filesContainingWord;
+		}
+		throw new TimeoutException("countWithAtomicLong() is Time out!");
+	}
+
 	public static void main(String[] args) {
 		WordCollector wc = new WordCollector();
 		HashSet<File> files = new HashSet<>();
-		files.add(new File("src/files/war-and-peace.txt"));
+		for(int i = 1; i < 10; i++) {
+			files.add(new File("src/files/war-and-peace" + i + ".txt"));
+		}
 		files.add(new File("src/files/alice.txt"));
-		
-		long start = System.nanoTime();
-		wc.collectWordsFromFiles(files);
-		long end = System.nanoTime();
-		System.out.print(end - start);
+		files.add(new File("src/files/LongAlice.txt"));
+
+		long start, end;
+		start = System.nanoTime();
+		wc.collectWords(files);
+		end = System.nanoTime();
+		System.out.println(end - start);
+
+		start = System.nanoTime();
+		try {
+			wc.collectWordsWithExecutorService(files);
+		} catch (InterruptedException | TimeoutException e) {
+			e.printStackTrace();
+		}
+		end = System.nanoTime();
+		System.out.println(end - start);
 
 	}
 
