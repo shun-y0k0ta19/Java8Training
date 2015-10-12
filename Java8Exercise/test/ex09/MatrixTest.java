@@ -13,16 +13,16 @@ public class MatrixTest {
 	@Test
 	public void getMethodTest() {
 		int[][] matrix = {{1, 2}, {3, 4}};
-		Matrix mObj = new Matrix(matrix);
-		assertEquals("mObj does not equal Matrix obj created matrix(2-dimension array).", mObj, new Matrix(matrix));
-		assertFalse("mObj retruns actual array it has.", new Matrix(matrix).get().equals(matrix));
+		Matrix mObj = Matrix.of(matrix);
+		assertEquals("mObj does not equal Matrix obj created matrix(2-dimension array).", mObj, Matrix.of(matrix));
+		assertFalse("mObj retruns actual array it has.", Matrix.of(matrix).get().equals(matrix));
 	}
 
 	@Test
 	public void equalsMethodTest() {
-		Matrix mObj = new Matrix(1, 2, 3, 4);
-		Matrix sameMObj = new Matrix(1, 2, 3, 4);
-		Matrix otherMObj = new Matrix(1, 1, 3, 4);
+		Matrix mObj = Matrix.of(1, 2, 3, 4);
+		Matrix sameMObj = Matrix.of(1, 2, 3, 4);
+		Matrix otherMObj = Matrix.of(1, 1, 3, 4);
 		int[][] matrix = {{1, 2}, {3, 4}};
 
 		assertTrue(mObj.equals(mObj));
@@ -32,8 +32,35 @@ public class MatrixTest {
 		assertFalse(otherMObj.equals(mObj));
 		assertFalse(mObj.equals(null));
 
-		assertTrue(new Matrix(matrix).equals(new Matrix(matrix)));
-		assertFalse(new Matrix(matrix) == new Matrix(matrix));
+		assertTrue("Matrixes' equals methods does not work correctly.", Matrix.of(matrix).equals(Matrix.of(matrix)));
+	}
+	
+	@Test
+	public void classMatrixIsImmutable() {
+		int[][] mat1 = setMatrixArray(1, 1, 1, 1);
+		Matrix mObj1 = Matrix.of(mat1);
+		mat1[0][0] = 2;
+		assertTrue("Matrix class is not immutable.", mObj1.get()[0][0] == 1);
+		
+		int[][] mat2 = mObj1.get();
+		mat2[0][0] = 2;
+		assertTrue("Matrix class is not immutable.", mObj1.get()[0][0] == 1);
+		
+		Matrix mObj2 = Matrix.of(setMatrixArray(0, 0, 0, 0));
+		Matrix mObj3 = Matrix.of(setMatrixArray(0, 0, 0, 0));
+		Matrix mObjResult = mObj2.multiply(mObj3);
+		int[][] resultMat = mObjResult.get();
+		resultMat[0][0] = 1;
+		assertTrue("Matrix class is not immutable.", mObj2.get()[0][0] == 0);
+		assertTrue("Matrix class is not immutable.", mObj3.get()[0][0] == 0);
+	}
+	
+	@Test
+	public void checkMatrixCach() {
+		Matrix mObj = Matrix.of(1, 2, 3, 4);
+		Matrix sameMObj = Matrix.of(1, 2, 3, 4);
+		assertTrue("Matrix cach does not work correctly.", mObj == sameMObj);
+	
 	}
 
 	@Test
@@ -45,8 +72,8 @@ public class MatrixTest {
 
 		for(int i = 0; i < ATTEMPTS; i++) {
 			int[][] matrix = createRandomMatrix(r);
-			mObj1 = new Matrix(matrix);
-			mObj2 = new Matrix(matrix);
+			mObj1 = Matrix.of(matrix);
+			mObj2 = Matrix.of(matrix);
 			assertTrue("mObj1 and mObj2 is not same object.", mObj1.equals(mObj2));
 			assertEquals("They do not have same hashcode.", mObj1.hashCode(), mObj2.hashCode());
 		}
@@ -70,14 +97,14 @@ public class MatrixTest {
 		int[][] mat2 = setMatrixArray(4, 5, 0, 7);
 		int[][] answer = setMatrixArray(4, 19, 12, 22);
 		assertTrue("multiple method does not return correct result.", 
-				new Matrix(mat1).multiply(new Matrix(mat2)).equals(new Matrix(answer)));
+				Matrix.of(mat1).multiply(Matrix.of(mat2)) == (Matrix.of(answer)));
 		
 		for(int ai = 0 ; ai < ATTEPTS; ai++) {
 			mat1 = createRandomMatrix(r);
 			mat2 = createRandomMatrix(r);
 			answer = multipleMatrix(mat1, mat2);
 			assertTrue("multiple method does not return correct result.", 
-					new Matrix(mat1).multiply(new Matrix(mat2)).equals(new Matrix(answer)));
+					Matrix.of(mat1).multiply(Matrix.of(mat2)).equals(Matrix.of(answer)));
 		}
 	}
 
