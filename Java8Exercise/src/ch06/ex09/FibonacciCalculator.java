@@ -18,7 +18,7 @@ public class FibonacciCalculator {
 		}
 		n--;
 		Matrix[] matrixArray = new Matrix[n];
-		Matrix matrixA = new Matrix(1, 1, 1, 0);
+		Matrix matrixA = Matrix.of(1, 1, 1, 0);
 		Arrays.parallelSetAll(matrixArray, index -> matrixA);
 		Arrays.parallelPrefix(matrixArray, Matrix::multiply); 
 		return matrixArray[n - 1].get()[0][0];

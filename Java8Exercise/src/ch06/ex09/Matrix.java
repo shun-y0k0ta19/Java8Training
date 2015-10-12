@@ -1,7 +1,9 @@
 package ch06.ex09;
 
+import java.lang.ref.SoftReference;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.WeakHashMap;
 
 /**
  * ２行２列の行列の要素を保持するクラス
@@ -10,42 +12,66 @@ import java.util.Objects;
  *
  */
 public final class Matrix {
-	
+	private static final WeakHashMap<String, SoftReference<Matrix>> mObjMap = new WeakHashMap<>();
+	private final String key;
 	private final int[][] matrix;
 	
+	/**
+	 * ２行２列の行列を表すMatrixオブジェクトを生成する
+	 * @param matrix Matrixオブジェクトの要素を示す２次元配列
+	 */
+	private Matrix(int[][] matrix) {
+		this.key = generateKey(matrix);
+		this.matrix = copyOf(matrix);
+	}
+
+	/**
+	 * ２行２列の行列を表すMatrixオブジェクトを生成する
+	 * @param matrix ２行２列の行列を表す２次元配列
+	 * @return 引数のパラメータを持つMatrixオブジェクト
+	 */
+	public static synchronized Matrix of(int[][] matrix) {
+		String key = generateKey(matrix);
+		SoftReference<Matrix> sRef;
+		Matrix mObj;
+		if((sRef = mObjMap.get(key)) != null) {
+			if((mObj = sRef.get()) != null) {
+				return mObj;
+			}
+		}
+		mObj = new Matrix(matrix);
+		sRef = new SoftReference<Matrix>(mObj);
+		mObjMap.put(mObj.key, sRef);
+		return mObj;
+	}
+	
+	private static String generateKey(int[][] matrix) {
+		String key = "";
+		for(int[] column : matrix) {
+			for(int elm : column) {
+				key += elm;
+			}
+		}
+		return key;
+	}
+
 	/**
 	 * ２行２列の行列を表すMatrixオブジェクトを生成する
 	 * @param a11 左上の要素の値
 	 * @param a12 右上の要素の値
 	 * @param a21 左下の要素の値
 	 * @param a22 右下の要素の値
+	 * @return 引数のパラメータを持つMatrixオブジェクト
 	 */
-	public Matrix(int a11, int a12, int a21, int a22) {
-		matrix = new int[2][2];
+	public static Matrix of(int a11, int a12, int a21, int a22) {
+		int[][] matrix = new int[2][2];
 		matrix[0][0] = a11;
 		matrix[0][1] = a12;
 		matrix[1][0] = a21;
 		matrix[1][1] = a22;
+		return of(matrix);
 	}
-	
-	/**
-	 * ２行２列の行列を表すMatrixオブジェクトを生成する
-	 * @param matrix Matrixオブジェクトの要素を示す２次元配列
-	 */
-	public Matrix(int[][] matrix) {
-		this.matrix = copyOf(matrix);
-	}
-	
-	/**
-	 * 2行２列の行列を表すMatrixオブジェクトを生成する
-	 * @param mObj 新しいMatrixオブジェクトに持たせる要素を持つMatrixオブジェクト
-	 */
-	public Matrix(Matrix mObj) {
-		Objects.requireNonNull(mObj, "mObj is null.");
-		this.matrix = copyOf(mObj.matrix);
-
-	}
-	
+		
 	/**
 	 * Matrixオブジェクトが保持する２行２列のint型の２次元配列を返す
 	 * @return　Matrixオブジェクトが保持する２次元配列
@@ -54,6 +80,11 @@ public final class Matrix {
 		return copyOf(matrix);
 	}
 	
+	/**
+	 * ２次元配列のコビーオブジェクトを生成する
+	 * @param matrix コピー元の2次元配列
+	 * @return
+	 */
 	private int[][] copyOf(int[][] matrix) {
 		Objects.requireNonNull(matrix, "matrix is null.");
 		int[][] newMatrix = new int[2][2];
@@ -69,7 +100,7 @@ public final class Matrix {
 	 * @return 積の結果となるMatrixオブジェクト
 	 */
 	public Matrix multiply(Matrix mObj) {
-		return new Matrix(multipleMatrix(this.matrix, mObj.get()));
+		return Matrix.of(multipleMatrix(this.matrix, mObj.get()));
 	}
 
 	private int[][] multipleMatrix(int[][] mat1, int[][] mat2) {
@@ -88,21 +119,6 @@ public final class Matrix {
 	public String toString() {
 		return "a11 = " + matrix[0][0] + ", a12 = " + matrix[0][1] + ", a21 = " + matrix[1][0]
 				+ ", a22 = " + matrix[1][1];
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if(Objects.isNull(obj)) {
-			return false;
-		}
-		Matrix mObj = (Matrix) obj;
-		if(this.matrix[0][0] == mObj.matrix[0][0]
-				&& this.matrix[0][1] == mObj.matrix[0][1]
-						&& this.matrix[1][0] == mObj.matrix[1][0]
-								&& this.matrix[1][1] == mObj.matrix[1][1]) {
-			return true;
-		}
-		return false;
 	}
 	
 	@Override
