@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +31,20 @@ public class FileUtilsTest {
 		assertEquals("createWordList() cannot make correct wordlist!", correctWordList, observedWordList);
 	}
 
+	@Test
+	public void testSplitBySpace() {
+		String testStr1 = " aa bb ";
+		String testStr2 = "aa  bb";
+		String testStr3 = "aa	bb";
+		List<String> correct = new ArrayList<>();
+		correct.add("aa");
+		correct.add("bb");
+		
+		assertTrue("cannot split correctly.", correct.equals(MyUtilities.FileUtils.splitBySpace(testStr1)));
+		assertTrue("cannot split correctly.", correct.equals(MyUtilities.FileUtils.splitBySpace(testStr2)));
+		assertTrue("cannot split correctly.", correct.equals(MyUtilities.FileUtils.splitBySpace(testStr3)));
+	}
+	
 	private List<String> createCorrectWordList() {
 		String contents;
 		try {
@@ -37,7 +52,7 @@ public class FileUtilsTest {
 					StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			// unreachable
-			throw new RuntimeException("Testing file cannot open.");
+			throw new RuntimeException("Testing file cannot open. (Unreachble! Check testcode or testing file.)");
 		}
 		return Arrays.asList(contents.split("[\\P{L}]+"));
 	}
