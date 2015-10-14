@@ -5,11 +5,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FileUtils {
 
@@ -60,14 +61,23 @@ public class FileUtils {
 	 * @return パスで指定されたファイルの単語のリスト
 	 */
 	private static List<String> createWordListImpl(Path path) {
-		String contents;
 		try {
-			contents = new String(Files.readAllBytes(path), 
+			String contents = new String(Files.readAllBytes(path), 
 					StandardCharsets.UTF_8);
+			return splitBySpace(contents);
+
 		} catch (IOException e) {
 			throw new IllegalArgumentException(path.toUri().toString() + " cannot open.");
 		}
-		return Arrays.asList(contents.split("\\P{L}+"));
+	}
+
+	/**
+	 * 文字列をスペースで区切り、それぞれの文字列を要素に持つリストを返す
+	 * @param contents スペースで区切りたい文字列
+	 * @return スペースで区切られた文字列のリスト
+	 */
+	public static List<String> splitBySpace(String contents) {
+		return Stream.of(contents.split("\\P{L}+")).filter(w -> !w.equals("")).collect(Collectors.toList());
 	}
 
 	/**
