@@ -1,0 +1,9 @@
+jjs> var substring = 'string'.slice(-2)
+jjs> substring.getClass()
+class java.lang.String
+jjs> java.lang.String.class.cast(substring)
+ng
+
+getClass()はJavaのメソッドであるため、JavaのStringクラスであると表示される。
+class.cast()も問題なくキャストされる。
+これはJavaのメソッドに文字列が渡されるときにJavaのStringオブジェクトに変換されるためである。

@@ -1,0 +1,21 @@
+var b = new java.math.BigInteger('1234567890987654321')
+
+result:
+jjs>var b = new java.math.BigInteger('1234567890987654321')
+jjs> b
+1234567890987654400
+
+jjs> b.mod(java.math.BigInteger.TEN)
+1
+
+正しく表示するには、
+java.lang.String.format('%d', b)
+1234567890987654321
+
+JavaScriptのNumber型はJavaのDouble型と同じであり、単にbを出力するとNumber型の
+として扱われ、小数点以下が省略された形で出力される
+そのときに数値が丸められるため、このような結果になる。
+jjs> java.lang.String.format('%f', Number(b))
+1234567890987654400.000000
+jjs> java.lang.String.format('%.0f', Number(b))
+1234567890987654400

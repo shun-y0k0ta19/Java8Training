@@ -1,0 +1,18 @@
+function generateExtendedArrayList() { 
+	var arr = new (Java.extend(java.util.ArrayList)) {
+		add: function(x) {
+			print('Adding ' + x );
+			return Java.super(arr).add(x)
+		}
+	}
+	return arr
+}
+
+var arr1 = generateExtendedArrayList()
+var arr2 = generateExtendedArrayList()
+arr1.add('aa')
+arr1.add('bb')
+arr2.add('cc')
+arr2.add('dd')
+for each(var elm in arr1) print(elm)
+for each(var elm in arr2) print(elm)
