@@ -1,6 +1,6 @@
 package ch06.ex01;
 
-import static MyUtilities.FileUtils.*;
+import static MyUtilities.MyFileUtils.*;
 
 import java.io.IOException;
 import java.util.List;

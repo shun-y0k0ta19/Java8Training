@@ -1,6 +1,6 @@
 package ex06;
 
-import static MyUtilities.FileUtils.createWordSet;
+import static MyUtilities.MyFileUtils.createWordSet;
 import static org.junit.Assert.*;
 
 import java.io.File;

@@ -1,6 +1,6 @@
 package ch06.ex05;
 
-import static MyUtilities.FileUtils.*;
+import static MyUtilities.MyFileUtils.*;
 
 import java.io.File;
 import java.util.HashSet;

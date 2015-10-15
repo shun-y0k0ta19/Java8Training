@@ -1,6 +1,6 @@
 package ch06.ex04;
 
-import static MyUtilities.FileUtils.*;
+import static MyUtilities.MyFileUtils.*;
 
 import java.util.Collection;
 import java.util.List;

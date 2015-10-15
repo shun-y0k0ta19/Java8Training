@@ -5,14 +5,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class FileUtils {
+public class MyFileUtils {
 
 	/**
 	 * パスで指定されたファイル内のすべての単語を格納したリストを生成する。
@@ -64,20 +63,11 @@ public class FileUtils {
 		try {
 			String contents = new String(Files.readAllBytes(path), 
 					StandardCharsets.UTF_8);
-			return splitBySpace(contents);
+			return Arrays.asList(contents.split("\\P{L}+"));
 
 		} catch (IOException e) {
 			throw new IllegalArgumentException(path.toUri().toString() + " cannot open.");
 		}
-	}
-
-	/**
-	 * 文字列をスペースで区切り、それぞれの文字列を要素に持つリストを返す
-	 * @param contents スペースで区切りたい文字列
-	 * @return スペースで区切られた文字列のリスト
-	 */
-	public static List<String> splitBySpace(String contents) {
-		return Stream.of(contents.split("\\P{L}+")).filter(w -> !w.equals("")).collect(Collectors.toList());
 	}
 
 	/**
