@@ -20,7 +20,7 @@ public class WordCollector {
 			Set<String> wordSet = createWordSet(file.toPath());
 			wordSet.stream().forEach(word -> {
 				//merge用のfileのセットを作る
-				Set<File> fileSet = new HashSet<>();
+				Set<File> fileSet = ConcurrentHashMap.newKeySet();
 				fileSet.add(file);
 				
 				filesContainingWord.merge(word, fileSet, (existSet, newSet) -> {
@@ -39,7 +39,7 @@ public class WordCollector {
 			es.submit(() -> {
 				createWordSet(file.toPath()).stream().forEach(word -> {
 					//merge用のfileのセットを作る
-					Set<File> fileSet = new HashSet<>();
+					Set<File> fileSet = ConcurrentHashMap.newKeySet();
 					fileSet.add(file);
 					
 					filesContainingWord.merge(word, fileSet, (existSet, newSet) -> {

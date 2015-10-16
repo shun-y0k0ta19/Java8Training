@@ -20,7 +20,7 @@ public class WordCollector2 {
 			Set<String> wordSet = createWordSet(file.toPath());
 			wordSet.stream().forEach(word -> {
 				filesContainingWord.computeIfAbsent(word, key -> {
-					return new HashSet<File>();
+					return ConcurrentHashMap.newKeySet();
 				}).add(file);
 			});
 		});
@@ -34,7 +34,8 @@ public class WordCollector2 {
 			es.submit(() -> {
 				createWordSet(file.toPath()).stream().forEach(word -> {
 					filesContainingWord.computeIfAbsent(word, key -> {
-						return new HashSet<File>();
+						//return new HashSet<>();
+						return ConcurrentHashMap.newKeySet();
 					}).add(file);
 				});
 			});
