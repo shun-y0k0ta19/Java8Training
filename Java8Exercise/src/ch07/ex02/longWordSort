@@ -1,6 +1,6 @@
 var contents = new java.lang.String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get('/Users/design/git/Java8Training/Java8Exercise/src/files/war-and-peace.txt')), java.nio.charset.StandardCharsets.UTF_8)
 var wordArray = contents.split('\\P{L}+')
 var sortedLongWord = java.util.stream.Stream.of(wordArray).filter(function(w){ w.length() > 12}).sorted().toArray()
-java.util.stream.Stream.of(wordArray).filter(function(w){ w.length() > 12}).sorted().forEach(function(sw){  })
+java.util.stream.Stream.of(wordArray).filter(function(w){ w.length() > 12}).sorted().forEach(function(sw){ print(sw) })
 
 var wordList = java.util.Arrays.asList(contents.split('\\P{L}+'))

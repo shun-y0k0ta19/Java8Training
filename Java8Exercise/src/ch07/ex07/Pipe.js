@@ -19,7 +19,7 @@ function pipe() {
 	    new java.lang.Thread(function() {
 		var data
 		while ((data = input.read()) != -1) {
-		    print(data)
+		    //print(data)
 		    output.write(data)
 		}
 		output.close()
@@ -32,7 +32,7 @@ function pipe() {
     var output = ""
     while (scanner.hasNextLine()) {
 	output += scanner.nextLine() + "\n"
-	print(output)
+	//print(output)
     }
     return output
 }
