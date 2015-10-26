@@ -61,7 +61,7 @@ public class SortTimeMeasure {
 	}
 	
 	public static void main(String[] args) {
-		int arrayNum = 30000;
+		int arrayNum = 80000;
 		System.out.println(calcFastArrayNum(arrayNum));
 	}
 

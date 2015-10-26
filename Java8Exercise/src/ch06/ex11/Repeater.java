@@ -22,8 +22,6 @@ public class Repeater {
 		});
 	}
 
-
-
 	public static void main(String[] args) {
 		PasswordAuthentication pa = new PasswordAuthentication("yokota", "secret".toCharArray());
 
@@ -31,6 +29,7 @@ public class Repeater {
 			Scanner scanner = new Scanner(System.in);
 			String pass = "";
 			for(;;){
+				System.out.println(Thread.currentThread().getId() + " input password: ");
 				if(scanner.hasNextLine()) {
 					pass = scanner.nextLine();
 					break;
@@ -53,7 +52,7 @@ public class Repeater {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (TimeoutException e) {
-				
+				//一秒スリープ
 			}catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
