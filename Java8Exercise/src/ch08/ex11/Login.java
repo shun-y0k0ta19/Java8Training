@@ -27,5 +27,6 @@ public class Login {
                 System.out.println(input.nextLine());
             }
         }
+        scanner.close();
     }
 }
