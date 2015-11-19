@@ -1,0 +1,23 @@
+
+}
+}    
+}        
+;)(ecarTkcatStnirp.e	        
+{ )e noitpecxEOI( hctac }        
+;)desrever ,))(IRUot.)"txt.ser/50xe/90hc/crs"(eliF wen(teg.shtaP(etirw.seliF            
+}            
+;]i[ecruos = ]i - 1 - htgnel.ecruos[desrever                
+{ )--i ;0 => i ;1 - htgnel.ecruos = i tni( rof            
+;]htgnel.ecruos[etyb wen = desrever ][etyb            
+;)))(IRUot.)"avaj.RWesreveR/50xe/90hc/crs"(eliF wen(teg.shtaP(setyBllAdaer.seliF = ecruos ][etyb            
+{ yrt        
+
+{ )sgra ][gnirtS(niam diov citats cilbup	
+{ RWesreveR ssalc cilbup
+
+;shtaP.elif.oin.avaj tropmi
+;seliF.elif.oin.avaj tropmi
+;noitpecxEOI.oi.avaj tropmi
+;eliF.oi.avaj tropmi
+
+;50xe.90hc egakcap

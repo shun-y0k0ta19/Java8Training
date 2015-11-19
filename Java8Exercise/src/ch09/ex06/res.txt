@@ -1,0 +1,22 @@
+}
+
+    }
+        }
+        	e.printStackTrace();
+        } catch (IOException e) {
+        	Files.write(Paths.get(new File("src/ch09/ex06/res.txt").toURI()), source);
+            Collections.reverse(source);
+        	List<String> source = Files.readAllLines(Paths.get(new File("src/ch09/ex06/ReverseWRLine.java").toURI()));
+        try {
+
+	public static void main(String[] args) {
+public class ReverseWRLine {
+
+import java.util.List;
+import java.util.Collections;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.IOException;
+import java.io.File;
+
+package ch09.ex06;
