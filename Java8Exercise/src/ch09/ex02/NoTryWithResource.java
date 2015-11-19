@@ -1,13 +1,12 @@
-package ch09.ex01;
+package ch09.ex02;
 
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class NoTryWithResource {
-
-	
 	public static void main(String[] args) throws Throwable {
+		Throwable exOrigin = null;
 		Scanner in = null;
 		PrintWriter out = null;
 		try {
@@ -17,20 +16,23 @@ public class NoTryWithResource {
 				out.println(in.next().toLowerCase());
 			}
 		} catch (Throwable ex) {
+			exOrigin = ex;
 			throw ex;
 		} finally {
 			if (in != null) {
 				try {
 					in.close();
 				} catch (Throwable e) {
-					e.printStackTrace();
+					exOrigin.addSuppressed(e);
+					exOrigin.printStackTrace();
 				}
 			}
 			if (out != null) {
 				try {
 					out.close();
 				} catch (Throwable e) {
-					e.printStackTrace();
+					exOrigin.addSuppressed(e);
+					exOrigin.printStackTrace();
 				}
 			}
 		}
