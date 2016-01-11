@@ -3,11 +3,10 @@ package ch08.ex12;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import junit.framework.TestCase;
 
 public class TestClassLoader {
 	public static void main(String[] args) throws ReflectiveOperationException {
-        Class<?> cls = Class.forName("ch08.ex12.Test.java");
+        Class<?> cls = Class.forName("ch08.ex12.Test");
         Object obj = cls.newInstance();
         int count = 0;
         for (Method m : cls.getMethods()) {

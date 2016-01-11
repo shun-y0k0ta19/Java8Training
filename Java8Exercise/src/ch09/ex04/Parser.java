@@ -12,6 +12,7 @@ public class Parser {
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             parser = factory.newSAXParser();
+            parser.hashCode();
         } catch (ParserConfigurationException | SAXException e) {
             e.printStackTrace();
             return;

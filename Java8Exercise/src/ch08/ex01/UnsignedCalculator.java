@@ -29,6 +29,7 @@ public class UnsignedCalculator {
 	public static void main(String[] args) {
 		int num1 = 3;
 		int num2 = Integer.MAX_VALUE;
+		System.out.println();
 		System.out.println(add(num1, num2));
 		System.out.println(subs(num1, num2));
 		System.out.println(multiply(num1, num2));
